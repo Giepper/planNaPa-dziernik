@@ -50,6 +50,13 @@
     button:active {
       background-color: #26af5f;
     }
+    h1.dupa {
+      font-size: xx-large;
+      color: blueviolet;
+      font-weight: bold;
+      position: absolute;
+      z-index: 999;
+    }
   </style>
   <body>
     <div class="box">
@@ -58,17 +65,52 @@
       <p>Aby naprawić urządzenie, musisz natychmiast postawić komuś kawę! ☕</p>
       <button id="btn">Kliknij, aby naprawić</button>
     </div>
+
+    <h1 class="dupa">!!! ZOSTALES ZAPAPIEZOWANY !!!</h1>
   </body>
   <script>
-    const btn = document.querySelector("#btn");
+    document.addEventListener("DOMContentLoaded", () => {
+      // Funkcja tworząca pojedynczy div w losowym miejscu
+      function createRandomDiv() {
+        const randomDiv = document.createElement("div");
 
-    btn.addEventListener("click", () => {
-      const link = document.createElement("a");
-      link.href ="papaj.jpg";
-      link.download = "papaj.jpg";
-      link.target = "_blank";
+        // Wymiary elementu
+        const divWidth = 100;
+        const divHeight = 100;
 
-      link.click();
+        // Stylizacja
+        randomDiv.style.width = `${divWidth}px`;
+        randomDiv.style.height = `${divHeight}px`;
+        randomDiv.style.position = "absolute";
+
+        // Losowy kolor (dla lepszego efektu wizualnego)
+        // const randomColor = `#${Math.floor(Math.random() * 16777215)
+        //   .toString(16)
+        //   .padStart(6, "0")}`;
+        // randomDiv.style.backgroundColor = randomColor;
+        randomDiv.style.backgroundImage = "url('papaj.jpg')";
+        randomDiv.style.backgroundSize = "cover";
+        randomDiv.style.backgroundPosition = "center";
+        randomDiv.style.backgroundRepeat = "no-repeat";
+        randomDiv.style.borderRadius = "6px";
+
+        // Obliczanie granic
+        const maxX = window.innerWidth - divWidth;
+        const maxY = document.documentElement.scrollHeight - divHeight;
+
+        // Losowa pozycja
+        const randomX = Math.floor(Math.random() * Math.max(0, maxX));
+        const randomY = Math.floor(Math.random() * Math.max(0, maxY));
+
+        randomDiv.style.left = `${randomX}px`;
+        randomDiv.style.top = `${randomY}px`;
+
+        // Dodanie do strony
+        document.body.appendChild(randomDiv);
+      }
+
+      // Wywołanie funkcji co 500 milisekund (0.5s)
+      setInterval(createRandomDiv, 100);
     });
   </script>
 </html>
